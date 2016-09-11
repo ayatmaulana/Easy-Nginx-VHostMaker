@@ -56,6 +56,4 @@ hanya tinggal mengetikan `easynginx`+ `enter` pada terminal.
  
 ##Thanks to 
 + Allah SWT 
-+  
- \ No newline at end of file 
-nambah color and baner
++ <a href="https://github.com/ditatompel">ditatombel</a>

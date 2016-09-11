@@ -34,7 +34,7 @@ Test sukses pada Ubuntu 14.04.
 ```zsj 
   php easyNginx.php 
 ``` 
-![Main](/home/ayatmaulana/CLI/EasyNginx/main.png  "Main") 
+[![nginx-ss.png](https://s17.postimg.org/qefwmrr1b/nginx_ss.png)](https://postimg.org/image/b5pz8zxcr/)
             
 + Isi *Server *, *Port* dan *Path* 
 + Setelah *success* coba akses *server name* yang tadi buat pada *Web Browser* 

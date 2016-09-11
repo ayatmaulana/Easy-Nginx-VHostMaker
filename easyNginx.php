@@ -16,14 +16,15 @@ class NginxVhostCreator
 		$this->makeFileConfig();
 	}
 
-	public function getConfigData(){
+	public function getConfigData()
+	{
 		$word = ['server','port','path'];
 		$data = [];
 		for ($i=0; $i < count($word); $i++) { 
 
 			try {
 				$handle = fopen('php://stdin', 'r');
-				echo $word[$i]." : ";
+				echo $this->color(strtoupper($word[$i]." : "),"l_green");
 				$line = fgets($handle);
 				switch ($word[$i]) {
 					case 'server':
@@ -31,7 +32,7 @@ class NginxVhostCreator
 							$data[$word[$i]] = $line;
 						}
 						else{
-							die('Name Server Invalid');
+							die($this->color("Name Server Invalid !!!!!!!!!\n","l_red"));
 						}
 
 						break;
@@ -41,7 +42,7 @@ class NginxVhostCreator
 							$data[$word[$i]] = $line;
 						}
 						else{
-							die('Port Invalid');
+							die($this->color("Port Invalid !!!!!!!!!\n","l_red"));
 						}
 
 						break;
@@ -52,7 +53,7 @@ class NginxVhostCreator
 						}
 						else
 						{
-							die('Path Invalid');
+							die($this->color("Path Invalid !!!!!!!!!\n","l_red"));
 						}
 				}
 				unset($line);
@@ -65,7 +66,7 @@ class NginxVhostCreator
 
 		$this->datanya = $data;
 
-		return $data;
+		return;
 	}
 
 	public function makeFileConfig(){
@@ -141,12 +142,16 @@ class NginxVhostCreator
 	}
 }
 
+function warnai($string, $fontcolor){
+	return NginxVhostCreator::color($string, $fontcolor);
+}
 
 
-$show = "\t".NginxVhostCreator::color("Simplify Your Life :)","yellow")."\n";
-$show .= "\t".NginxVhostCreator::color("--------------------","red")."\n";
-$show .= "\t".NginxVhostCreator::color("Easy Nginx Vhost Config Maker","l_blue")."\n";
-$show .= "\t".NginxVhostCreator::color("(c) Ayat Maulana 2016","l_blue")."\n\n";
+echo "\n\n". 
+warnai("\t _, _  _, _ _, _ _  ,   _,_ _,_  _,  _, ___   _, _  _, _,_ __, __,","l_red")."\n".
+warnai("\t |\ | / _ | |\ | '\/    | / |_| / \ (_   |    |\/| /_\ |_/ |_  |_)","l_red")."\n".
+warnai("\t | \| \ / | | \|  /\    |/  | | \ / , )  |    |  | | | | \ |   | \\","white")."\n".
+warnai("\t ~  ~  ~  ~ ~  ~ ~  ~   ~   ~ ~  ~   ~   ~    ~  ~ ~ ~ ~ ~ ~~~ ~ ~","white")."\n".
+warnai("\t Simplify Your Life :)","white")."                       ".warnai("(c)","yellow").warnai(" AyatMaulana ","l_red").warnai("2016","l_blue")."\n\n";
 
-echo $show;
 (new NginxVhostCreator());

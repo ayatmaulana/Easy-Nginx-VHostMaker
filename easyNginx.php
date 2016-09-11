@@ -8,14 +8,16 @@ if (isset($_SERVER['REMOTE_ADDR'])) die('Permission Denied');
 
 class NginxVhostCreator
 {
+	public $datanya;
 	
 	public function __construct()
 	{
-		print_r($this->getConfigData());
+		$this->getConfigData();
+		$this->makeFileConfig();
 	}
 
 	public function getConfigData(){
-		$word = ['server','port','path','php'];
+		$word = ['server','port','path','htaccess'];
 		$data = [];
 		for ($i=0; $i < count($word); $i++) { 
 
@@ -33,7 +35,27 @@ class NginxVhostCreator
 						}
 
 						break;
+
+					case 'port':
+						if (preg_match("/^[0-9]{2,4}$/",$line)) {
+							$data[$word[$i]] = $line;
+						}
+						else{
+							die('Port Invalid');
+						}
+
+						break;
+
+					case 'path':
+						if (preg_match("/\/{1}([a-z0-9-])(.*)/",$line)) {
+							$data[$word[$i]] = $line;
+						}
+						else
+						{
+							die('Path Invalid');
+						}
 				}
+				unset($line);
 
 			} catch (Exception $e) {
 				die($e->getMessage());	
@@ -41,10 +63,9 @@ class NginxVhostCreator
 
 		}
 
-		return $data;
-	}
+		$this->datanya = $data;
 
-	public function makeFileConfig(){
+		return $data;
 	}
 }
 
@@ -52,7 +73,7 @@ class NginxVhostCreator
 
 $show = "\tSimplify Your Life :) \n";
 $show .= "\t----------------------\n";
-$show .= "\tEasy Nginx Vhost Config\n";
+$show .= "\tEasy Nginx Vhost Config Maker\n";
 $show .= "\t(c) Ayat Maulana 2016\n\n";
 
 echo $show;

@@ -108,7 +108,7 @@ class NginxVhostCreator
 
 		exec("echo \"".$config."\" > ~/".trim($this->datanya['server']));
 		exec("sudo mv ~/". trim($this->datanya['server'])."  /etc/nginx/sites-enabled/".$this->datanya['server']);
-		exec("sudo ln -s /etc/nginx/sites-enabled/".trim($this->datanya['server'])." /etc/nginx/sites-available"); 
+		exec("sudo ln -s /etc/nginx/sites-enabled/".trim($this->datanya['server'])." /etc/nginx/sites-avaible"); 
 		exec("sudo nginx -t");
 		exec("sudo service nginx restart");
 

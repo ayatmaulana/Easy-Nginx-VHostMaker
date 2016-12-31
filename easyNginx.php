@@ -154,4 +154,8 @@ warnai("\t | \| \ / | | \|  /\    |/  | | \ / , )  |    |  | | | | \ |   | \\","
 warnai("\t ~  ~  ~  ~ ~  ~ ~  ~   ~   ~ ~  ~   ~   ~    ~  ~ ~ ~ ~ ~ ~~~ ~ ~","white")."\n".
 warnai("\t Simplify Your Life :)","white")."                       ".warnai("(c)","yellow").warnai(" AyatMaulana ","l_red").warnai("2016","l_blue")."\n\n";
 
+<<<<<<< HEAD
 (new NginxVhostCreator());
+=======
+(new NginxVhostCreator());
+>>>>>>> 3ea615e1ddb091c9ad414302cc0d9479264730f6

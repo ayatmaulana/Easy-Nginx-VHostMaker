@@ -88,20 +88,22 @@ class NginxVhostCreator
 		    
 		    location / {
 		            # Check if a file or directory index file exists, else route it to index.php.
-		            try_files ".'\$'."uri ".'\$'."uri/ /index.php;
+		            try_files ".'\$'."uri ".'\$'."uri/ /index.php?$query_string;
 		    }";
 
 		$config .= "
 			# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
 			#
 			location ~ \.php$ {
+				try_files $uri /index.php =404;
 				fastcgi_split_path_info ^(.+\.php)(/.+)$;
 			#
 			#	# With php5-cgi alone:
 			#	fastcgi_pass 127.0.0.1:9000;
 			#	# With php7.1-fpm:
-				fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
+				fastcgi_pass unix:/run/php/php7.1-fpm.sock;
 				fastcgi_index index.php;
+				fastcgi_pparam SCRIPT_FILENAME $document_root$fastcgi_script_name;
 				include fastcgi_params;
 			}
 		}";

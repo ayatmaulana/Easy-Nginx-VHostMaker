@@ -1,10 +1,13 @@
 <?php 
+require_once('vendor/autoload.php');
 /**
 * (c) Ayat Maulana 2016
 * Simple Nginx VHost Creator
 */
 
 if (isset($_SERVER['REMOTE_ADDR'])) die('Permission Denied CLI Only :)');
+
+
 
 class NginxVhostCreator
 {
@@ -18,15 +21,25 @@ class NginxVhostCreator
 
 	public function getConfigData()
 	{
-		$word = ['server','port','path'];
+		$climate = new League\CLImate\CLImate;
+		$word = ['php-version','server','port','path'];
 		$data = [];
 		for ($i=0; $i < count($word); $i++) { 
 
 			try {
 				$handle = fopen('php://stdin', 'r');
 				echo $this->color(strtoupper($word[$i]." : "),"l_green");
-				$line = fgets($handle);
+				if ($i != 0) {
+					$line = fgets($handle);
+				}
 				switch ($word[$i]) {
+					case 'php-version':
+						$option   = ['7.0','7.1'];
+						$input    = $climate->radio('',$option);
+						$response = $input->prompt();
+						$data[$word[$i]] =  $response;
+
+						break;
 					case 'server':
 						if (preg_match("/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/", $line)) {
 							$data[$word[$i]] = $line;
@@ -100,8 +113,8 @@ class NginxVhostCreator
 			#
 			#	# With php5-cgi alone:
 			#	fastcgi_pass 127.0.0.1:9000;
-			#	# With php7.1-fpm:
-				fastcgi_pass unix:/run/php/php7.1-fpm.sock;
+			#	# With php".trim($this->datanya['php-version'])."-fpm:
+				fastcgi_pass unix:/run/php/php".trim($this->datanya['php-version'])."-fpm.sock;
 				fastcgi_index index.php;
 				fastcgi_param SCRIPT_FILENAME ".'\$'."document_root".'\$'."fastcgi_script_name;
 				include fastcgi_params;

@@ -2,9 +2,10 @@
  
  
 #### Simplify Your Life :) 
-<br> 
+
 ## Deskripsi 
-Tool ini baru hanya untuk ***Linux Debian Familly *** support PHP 5.6 FPM, dan hanya untuk ***Development*** bukan untuk *Production*. 
+
+Tool ini baru hanya untuk ***Linux Debian Familly*** support PHP 5.6 FPM, dan hanya untuk ***Development*** bukan untuk *Production*. 
  
 Test sukses pada Ubuntu 14.04. 
 

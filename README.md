@@ -11,7 +11,7 @@ Test sukses pada Ubuntu 14.04.
 
 ## Persiapan 
 * [x] Linux Debian,Ubuntu,etc **(Debian Fams)** 
-* [x] ***Nginx*** dan ***PHP5.6-FPM *** 
+* [x] ***Nginx*** dan ***PHP5.6-FPM*** 
 * [x] ***CLI ONLY*** 
  
 ## Cara menggunakan 
